@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.wallpaper_pro">
+    package="com.adavii.wallpaper_pro">
    <application
-        android:label="wallpaper_pro"
+        android:label="Wallpaper Pro"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
