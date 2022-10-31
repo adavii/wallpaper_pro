@@ -15,14 +15,14 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  late String searchQUery = widget.searchQuery;
+  late String searchQUery = widget.searchQuery.trim();
   int noOfImageToLoad = imagesperpage;
   List<PhotosModel> photos = [];
   bool noResults = false;
 
   getSearchResults(String searchQuery) async {
     photos = [];
-    searchQUery = searchQuery;
+    searchQUery = searchQuery.trim();
     await http.get(
         Uri.parse(
           "https://api.pexels.com/v1/search?query=$searchQuery&per_page=$noOfImageToLoad&page=1",

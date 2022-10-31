@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:wallpaper_pro/views/search_view.dart';
 
 class CategorieModel {
   late String categorieName;
@@ -7,7 +8,7 @@ class CategorieModel {
 }
 
 String apiKEY = "563492ad6f917000010000017c1283d9fbb649e386b164a574c5eebb";
-int imagesperpage = 2;
+int imagesperpage = 30;
 
 List<CategorieModel> getCategories() {
   List<CategorieModel> categories = [];
@@ -74,14 +75,14 @@ class CategoriesTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(
-      //       context,
-      //       MaterialPageRoute(
-      //           builder: (context) => CategorieScreen(
-      //                 categorie: categorie,
-      //               )));
-      // },
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SearchView(
+                      searchQuery: categorie,
+                    )));
+      },
       child: Container(
         margin: const EdgeInsets.only(right: 8, top: 20, bottom: 20),
         child: kIsWeb

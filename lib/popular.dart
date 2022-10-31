@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +5,25 @@ import 'package:wallpaper_pro/views/image_view.dart';
 import 'photos_model.dart';
 // import 'image_view.dart';
 
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll("#", "");
+    if (hexColor.length == 6) {
+      hexColor = "FF$hexColor";
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+}
+
 Widget wallPaper(List<PhotosModel> listPhotos, BuildContext context) {
   return GridView.count(
       crossAxisCount: 2,
       childAspectRatio: 0.6,
       physics: const ClampingScrollPhysics(),
       shrinkWrap: true,
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       mainAxisSpacing: 6.0,
       crossAxisSpacing: 6.0,
       children: listPhotos.map((PhotosModel photoModel) {
@@ -23,7 +34,7 @@ Widget wallPaper(List<PhotosModel> listPhotos, BuildContext context) {
               context,
               MaterialPageRoute(
                 builder: (context) => ViewImage(
-                  imageUrl: photoModel.src.portrait,
+                  image: photoModel,
                 ),
               ),
             );
@@ -42,9 +53,7 @@ Widget wallPaper(List<PhotosModel> listPhotos, BuildContext context) {
                   : CachedNetworkImage(
                       imageUrl: photoModel.src.portrait,
                       placeholder: (context, url) => Container(
-                        color: Color(
-                          (math.Random().nextDouble() * 0xFFFFFF).toInt(),
-                        ).withOpacity(1.0),
+                        color: HexColor(photoModel.avgColor),
                       ),
                       fit: BoxFit.cover,
                     ),
